@@ -1,5 +1,5 @@
-## 1.0.1+6
-- update version sdk
+## 1.0.2+8
+- Add support for Flutter 3.10 and Dart 3.0
 ## 1.0.1+5
 - Update issue Issue 45 more detail [ more detail](https://github.com/hifiaz/country-list-pick/pull/46#issue-690242804 "more detail")
 ## 1.0.1+4
@@ -56,7 +56,3 @@
 ## 0.0.1
 
 - Initial publish package.
-
-
-
-

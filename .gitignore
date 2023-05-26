@@ -1,8 +1,14 @@
 .DS_Store
-.vscode
+.vscode/
+.idea/*
+.idea
 .dart_tool/
 
 .packages
 .pub/
 
 build/
+
+*.iml
+*.ipr
+*.iws

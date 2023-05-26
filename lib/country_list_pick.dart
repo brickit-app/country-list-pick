@@ -1,42 +1,40 @@
+import 'dart:ui' as ui;
+
 import 'package:country_list_pick/country_selection_theme.dart';
 import 'package:country_list_pick/selection_list.dart';
 import 'package:country_list_pick/support/code_countries_en.dart';
 import 'package:country_list_pick/support/code_country.dart';
 import 'package:country_list_pick/support/code_countrys.dart';
+import 'package:figma_squircle/figma_squircle.dart';
 import 'package:flutter/material.dart';
 
-import 'support/code_country.dart';
-
+export 'country_selection_theme.dart';
 export 'support/code_country.dart';
 
-export 'country_selection_theme.dart';
-
 class CountryListPick extends StatefulWidget {
-  CountryListPick(
-      {this.onChanged,
-      this.initialSelection,
-      this.appBar,
-      this.pickerBuilder,
-      this.countryBuilder,
-      this.theme,
-      this.useUiOverlay = true,
-      this.useSafeArea = false});
+  CountryListPick({
+    this.onChanged,
+    this.initialSelection,
+    this.appBar,
+    this.pickerBuilder,
+    this.countryBuilder,
+    this.theme,
+    this.useUiOverlay = true,
+    this.useSafeArea = false,
+  });
 
   final String? initialSelection;
   final ValueChanged<CountryCode?>? onChanged;
   final PreferredSizeWidget? appBar;
-  final Widget Function(BuildContext context, CountryCode? countryCode)?
-      pickerBuilder;
+  final Widget Function(BuildContext context, CountryCode? countryCode)? pickerBuilder;
   final CountryTheme? theme;
-  final Widget Function(BuildContext context, CountryCode countryCode)?
-      countryBuilder;
+  final Widget Function(BuildContext context, CountryCode countryCode)? countryBuilder;
   final bool useUiOverlay;
   final bool useSafeArea;
 
   @override
   _CountryListPickState createState() {
-    List<Map> jsonList =
-        this.theme?.showEnglishName ?? true ? countriesEnglish : codes;
+    List<Map> jsonList = this.theme?.showEnglishName ?? true ? countriesEnglish : codes;
 
     List elements = jsonList
         .map((s) => CountryCode(
@@ -58,40 +56,52 @@ class _CountryListPickState extends State<CountryListPick> {
 
   @override
   void initState() {
+    super.initState();
     if (widget.initialSelection != null) {
-      selectedItem = elements.firstWhere(
-          (e) =>
-              (e.code.toUpperCase() ==
-                  widget.initialSelection!.toUpperCase()) ||
-              (e.dialCode == widget.initialSelection),
-          orElse: () => elements[0] as CountryCode);
+      selectedItem = elements.firstWhere((e) => (e.code.toUpperCase() == widget.initialSelection!.toUpperCase()) || (e.dialCode == widget.initialSelection), orElse: () => elements[0] as CountryCode);
     } else {
       selectedItem = elements[0];
     }
-
-    super.initState();
   }
 
-  void _awaitFromSelectScreen(BuildContext context, PreferredSizeWidget? appBar,
-      CountryTheme? theme) async {
-    final result = await Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => SelectionList(
-            elements,
-            selectedItem,
-            appBar: widget.appBar ??
-                AppBar(
-                  backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
-                  title: Text("Select Country"),
-                ),
-            theme: theme,
-            countryBuilder: widget.countryBuilder,
-            useUiOverlay: widget.useUiOverlay,
-            useSafeArea: widget.useSafeArea,
-          ),
-        ));
+  void _awaitFromSelectScreen(BuildContext context, PreferredSizeWidget? appBar, CountryTheme? theme) async {
+    launchSelectCountryScreen(context, theme);
+  }
 
+  Future<void> launchSelectCountryScreen(BuildContext context, CountryTheme? theme) async {
+    final result = await showModalBottomSheet(
+      context: context,
+      shape: FigmaSquircleConst.bottomSheetShape,
+      clipBehavior: Clip.antiAliasWithSaveLayer,
+      backgroundColor: Colors.transparent,
+      isScrollControlled: true,
+      builder: (context) => Padding(
+        padding: EdgeInsets.only(top: MediaQueryData.fromWindow(ui.window).padding.top + 8.0),
+        child: SafeArea(
+          bottom: false,
+          child: Container(
+            clipBehavior: Clip.antiAliasWithSaveLayer,
+            decoration: ShapeDecoration(
+              shape: FigmaSquircleConst.bottomSheetShape,
+            ),
+            child: SelectionList(
+              elements,
+              selectedItem,
+              appBar: widget.appBar ??
+                  AppBar(
+                    backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
+                    title: Text("Select Country"),
+                  ),
+              theme: theme,
+              countryBuilder: widget.countryBuilder,
+              useUiOverlay: widget.useUiOverlay,
+              useSafeArea: widget.useSafeArea,
+            ),
+          ),
+        ),
+      ),
+    );
+    print(result);
     setState(() {
       selectedItem = result ?? selectedItem;
       widget.onChanged!(result ?? selectedItem);
@@ -101,6 +111,7 @@ class _CountryListPickState extends State<CountryListPick> {
   @override
   Widget build(BuildContext context) {
     return TextButton(
+      style: TextButton.styleFrom(tapTargetSize: MaterialTapTargetSize.shrinkWrap, padding: EdgeInsets.zero, minimumSize: Size(0, 0), alignment: Alignment.center),
       onPressed: () {
         _awaitFromSelectScreen(context, widget.appBar, widget.theme);
       },
@@ -143,4 +154,16 @@ class _CountryListPickState extends State<CountryListPick> {
             ),
     );
   }
+}
+
+class FigmaSquircleConst {
+  static const bottomSheetShape = SmoothRectangleBorder(
+    borderRadius: SmoothBorderRadius.only(
+      topLeft: SmoothRadius(cornerRadius: 18, cornerSmoothing: 0.6),
+      topRight: SmoothRadius(
+        cornerRadius: 18,
+        cornerSmoothing: 0.6,
+      ),
+    ),
+  );
 }
