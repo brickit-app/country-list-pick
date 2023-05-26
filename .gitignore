@@ -7,3 +7,7 @@
 .pub/
 
 build/
+
+*.iml
+*.ipr
+*.iws
