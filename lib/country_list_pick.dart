@@ -56,13 +56,12 @@ class _CountryListPickState extends State<CountryListPick> {
 
   @override
   void initState() {
+    super.initState();
     if (widget.initialSelection != null) {
       selectedItem = elements.firstWhere((e) => (e.code.toUpperCase() == widget.initialSelection!.toUpperCase()) || (e.dialCode == widget.initialSelection), orElse: () => elements[0] as CountryCode);
     } else {
       selectedItem = elements[0];
     }
-
-    super.initState();
   }
 
   void _awaitFromSelectScreen(BuildContext context, PreferredSizeWidget? appBar, CountryTheme? theme) async {

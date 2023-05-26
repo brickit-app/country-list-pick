@@ -121,8 +121,8 @@ class _ModalBottomSheetState<T> extends State<_ModalBottomSheet<T>> {
 
   @override
   void initState() {
-    widget.route.animation?.addListener(updateController);
     super.initState();
+    widget.route.animation?.addListener(updateController);
   }
 
   @override
