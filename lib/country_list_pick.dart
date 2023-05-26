@@ -12,7 +12,16 @@ export 'country_selection_theme.dart';
 export 'support/code_country.dart';
 
 class CountryListPick extends StatefulWidget {
-  CountryListPick({this.onChanged, this.initialSelection, this.appBar, this.pickerBuilder, this.countryBuilder, this.theme, this.useUiOverlay = true, this.useSafeArea = false});
+  CountryListPick({
+    this.onChanged,
+    this.initialSelection,
+    this.appBar,
+    this.pickerBuilder,
+    this.countryBuilder,
+    this.theme,
+    this.useUiOverlay = true,
+    this.useSafeArea = false,
+  });
 
   final String? initialSelection;
   final ValueChanged<CountryCode?>? onChanged;
@@ -158,52 +167,4 @@ class FigmaSquircleConst {
       ),
     ),
   );
-
-  static const bigScanButton = SmoothRectangleBorder(
-    borderRadius: SmoothBorderRadius.only(
-      topLeft: SmoothRadius(cornerRadius: 34, cornerSmoothing: 0.6),
-      topRight: SmoothRadius(cornerRadius: 34, cornerSmoothing: 0.6),
-      bottomLeft: SmoothRadius(cornerRadius: 34, cornerSmoothing: 0.6),
-      bottomRight: SmoothRadius(cornerRadius: 34, cornerSmoothing: 0.6),
-    ),
-  );
-
-  static const smallScanButton = SmoothRectangleBorder(
-    borderRadius: SmoothBorderRadius.only(
-      topLeft: SmoothRadius(cornerRadius: 14, cornerSmoothing: 0.6),
-      topRight: SmoothRadius(cornerRadius: 14, cornerSmoothing: 0.6),
-      bottomLeft: SmoothRadius(cornerRadius: 14, cornerSmoothing: 0.6),
-      bottomRight: SmoothRadius(cornerRadius: 14, cornerSmoothing: 0.6),
-    ),
-  );
-
-  static const itemButton = SmoothRectangleBorder(
-    borderRadius: SmoothBorderRadius.only(
-      topLeft: SmoothRadius(cornerRadius: 12, cornerSmoothing: 0.6),
-      topRight: SmoothRadius(cornerRadius: 12, cornerSmoothing: 0.6),
-      bottomLeft: SmoothRadius(cornerRadius: 12, cornerSmoothing: 0.6),
-      bottomRight: SmoothRadius(cornerRadius: 12, cornerSmoothing: 0.6),
-    ),
-  );
-
-  static const shareButton = SmoothRectangleBorder(
-    borderRadius: SmoothBorderRadius.only(
-      topLeft: SmoothRadius(cornerRadius: 28, cornerSmoothing: 0.6),
-      topRight: SmoothRadius(cornerRadius: 28, cornerSmoothing: 0.6),
-      bottomLeft: SmoothRadius(cornerRadius: 28, cornerSmoothing: 0.6),
-      bottomRight: SmoothRadius(cornerRadius: 28, cornerSmoothing: 0.6),
-    ),
-  );
-
-  static const privacyButton = SmoothRectangleBorder(
-    borderRadius: SmoothBorderRadius.only(
-      topLeft: SmoothRadius(cornerRadius: 20, cornerSmoothing: 0.6),
-      topRight: SmoothRadius(cornerRadius: 20, cornerSmoothing: 0.6),
-      bottomLeft: SmoothRadius(cornerRadius: 20, cornerSmoothing: 0.6),
-      bottomRight: SmoothRadius(cornerRadius: 20, cornerSmoothing: 0.6),
-    ),
-  );
-
-  static final SmoothBorderRadius scanCameraPreview = SmoothBorderRadius(cornerRadius: 16, cornerSmoothing: 0.6);
-  static final SmoothBorderRadius photoCameraPreview = SmoothBorderRadius(cornerRadius: 12, cornerSmoothing: 0.6);
 }

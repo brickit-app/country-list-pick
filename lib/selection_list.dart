@@ -1,5 +1,3 @@
-import 'package:country_list_pick/country_selection_theme.dart';
-import 'package:country_list_pick/support/code_country.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -7,7 +5,16 @@ import 'package:flutter/services.dart';
 import 'country_list_pick.dart';
 
 class SelectionList extends StatefulWidget {
-  SelectionList(this.elements, this.initialSelection, {Key? key, this.appBar, this.theme, this.countryBuilder, this.useUiOverlay = true, this.useSafeArea = false}) : super(key: key);
+  SelectionList(
+    this.elements,
+    this.initialSelection, {
+    Key? key,
+    this.appBar,
+    this.theme,
+    this.countryBuilder,
+    this.useUiOverlay = true,
+    this.useSafeArea = false,
+  }) : super(key: key);
 
   final PreferredSizeWidget? appBar;
   final List elements;
@@ -23,7 +30,6 @@ class SelectionList extends StatefulWidget {
 
 class _SelectionListState extends State<SelectionList> {
   late List countries;
-  final TextEditingController _controller = TextEditingController();
   ScrollController? _controllerScroll;
   var diff = 0.0;
 
@@ -225,8 +231,5 @@ class _SelectionListState extends State<SelectionList> {
         posSelected = countryName![0].toUpperCase().codeUnitAt(0) - 'A'.codeUnitAt(0);
       });
     }
-
-    if ((_controllerScroll!.offset) >= (_controllerScroll!.position.maxScrollExtent)) {}
-    if (_controllerScroll!.offset <= _controllerScroll!.position.minScrollExtent && !_controllerScroll!.position.outOfRange) {}
   }
 }

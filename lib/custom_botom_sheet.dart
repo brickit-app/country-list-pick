@@ -1,4 +1,3 @@
-// import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'dart:async';
 
 import 'package:flutter/material.dart';
@@ -31,8 +30,7 @@ Future<T?> showCustomMaterialModalBottomSheet<T>({
   assert(enableDrag != null);
   assert(debugCheckHasMediaQuery(context));
   assert(debugCheckHasMaterialLocalizations(context));
-  final result = await Navigator.of(context, rootNavigator: useRootNavigator)
-      .push(ModalBottomSheetRoute<T>(
+  final result = await Navigator.of(context, rootNavigator: useRootNavigator).push(ModalBottomSheetRoute<T>(
     builder: builder,
     closeProgressThreshold: closeProgressThreshold,
     containerBuilder: _materialContainerBuilder(
@@ -57,30 +55,16 @@ Future<T?> showCustomMaterialModalBottomSheet<T>({
 }
 
 //Default container builder is the Material Appearance
-WidgetWithChildBuilder _materialContainerBuilder(BuildContext context,
-    {Color? backgroundColor,
-      double? elevation,
-      ThemeData? theme,
-      Clip? clipBehavior,
-      ShapeBorder? shape}) {
+WidgetWithChildBuilder _materialContainerBuilder(BuildContext context, {Color? backgroundColor, double? elevation, ThemeData? theme, Clip? clipBehavior, ShapeBorder? shape}) {
   final bottomSheetTheme = Theme.of(context).bottomSheetTheme;
-  final color = backgroundColor ??
-      bottomSheetTheme.modalBackgroundColor ??
-      bottomSheetTheme.backgroundColor;
+  final color = backgroundColor ?? bottomSheetTheme.modalBackgroundColor ?? bottomSheetTheme.backgroundColor;
   final _elevation = elevation ?? bottomSheetTheme.elevation ?? 0.0;
   final _shape = shape ?? bottomSheetTheme.shape;
-  final _clipBehavior =
-      clipBehavior ?? bottomSheetTheme.clipBehavior ?? Clip.none;
+  final _clipBehavior = clipBehavior ?? bottomSheetTheme.clipBehavior ?? Clip.none;
 
-  final result = (context, animation, child) => Material(
-      color: color,
-      elevation: _elevation,
-      shape: _shape,
-      clipBehavior: _clipBehavior,
-      child: child);
+  final result = (context, animation, child) => Material(color: color, elevation: _elevation, shape: _shape, clipBehavior: _clipBehavior, child: child);
   if (theme != null) {
-    return (context, animation, child) =>
-        Theme(data: theme, child: result(context, animation, child));
+    return (context, animation, child) => Theme(data: theme, child: result(context, animation, child));
   } else {
     return result;
   }
@@ -159,8 +143,7 @@ class _ModalBottomSheetState<T> extends State<_ModalBottomSheet<T>> {
   Widget build(BuildContext context) {
     assert(debugCheckHasMediaQuery(context));
     assert(widget.route._animationController != null);
-    final scrollController = PrimaryScrollController.of(context) ??
-        (_scrollController ??= ScrollController());
+    final scrollController = PrimaryScrollController.of(context) ?? (_scrollController ??= ScrollController());
     return ModalScrollController(
       controller: scrollController,
       child: Builder(
@@ -182,9 +165,9 @@ class _ModalBottomSheetState<T> extends State<_ModalBottomSheet<T>> {
                 animationController: widget.route._animationController!,
                 shouldClose: widget.route._hasScopedWillPopCallback
                     ? () async {
-                  final willPop = await widget.route.willPop();
-                  return willPop != RoutePopDisposition.doNotPop;
-                }
+                        final willPop = await widget.route.willPop();
+                        return willPop != RoutePopDisposition.doNotPop;
+                      }
                     : null,
                 onClosing: () {
                   if (widget.route.isCurrent) {
@@ -269,8 +252,7 @@ class ModalBottomSheetRoute<T> extends PopupRoute<T> {
   bool get _hasScopedWillPopCallback => hasScopedWillPopCallback;
 
   @override
-  Widget buildPage(BuildContext context, Animation<double> animation,
-      Animation<double> secondaryAnimation) {
+  Widget buildPage(BuildContext context, Animation<double> animation, Animation<double> secondaryAnimation) {
     Widget bottomSheet = SafeArea(
       child: _ModalBottomSheet<T>(
         route: this,
@@ -303,18 +285,16 @@ class ModalBottomSheetRoute<T> extends PopupRoute<T> {
   }
 
   @override
-  bool canTransitionTo(TransitionRoute<dynamic> nextRoute) =>
-      nextRoute is ModalBottomSheetRoute;
+  bool canTransitionTo(TransitionRoute<dynamic> nextRoute) => nextRoute is ModalBottomSheetRoute;
 
   @override
-  bool canTransitionFrom(TransitionRoute<dynamic> previousRoute) =>
-      previousRoute is ModalBottomSheetRoute || previousRoute is PageRoute;
+  bool canTransitionFrom(TransitionRoute<dynamic> previousRoute) => previousRoute is ModalBottomSheetRoute || previousRoute is PageRoute;
 
   Widget getPreviousRouteTransition(
-      BuildContext context,
-      Animation<double> secondAnimation,
-      Widget child,
-      ) {
+    BuildContext context,
+    Animation<double> secondAnimation,
+    Widget child,
+  ) {
     return child;
   }
 }
@@ -347,15 +327,10 @@ Future<T?> showCustomModalBottomSheet<T>({
   assert(enableDrag != null);
   assert(debugCheckHasMediaQuery(context));
   assert(debugCheckHasMaterialLocalizations(context));
-  final hasMaterialLocalizations =
-      Localizations.of<MaterialLocalizations>(context, MaterialLocalizations) !=
-          null;
-  final barrierLabel = hasMaterialLocalizations
-      ? MaterialLocalizations.of(context).modalBarrierDismissLabel
-      : '';
+  final hasMaterialLocalizations = Localizations.of<MaterialLocalizations>(context, MaterialLocalizations) != null;
+  final barrierLabel = hasMaterialLocalizations ? MaterialLocalizations.of(context).modalBarrierDismissLabel : '';
 
-  final result = await Navigator.of(context, rootNavigator: useRootNavigator)
-      .push(ModalBottomSheetRoute<T>(
+  final result = await Navigator.of(context, rootNavigator: useRootNavigator).push(ModalBottomSheetRoute<T>(
     builder: builder,
     bounce: bounce,
     containerBuilder: containerWidget,
