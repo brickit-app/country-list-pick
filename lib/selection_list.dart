@@ -5,7 +5,7 @@ import 'package:flutter/services.dart';
 import 'country_list_pick.dart';
 
 class SelectionList extends StatefulWidget {
-  SelectionList(
+  const SelectionList(
     this.elements,
     this.initialSelection, {
     Key? key,
