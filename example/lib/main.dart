@@ -1,17 +1,15 @@
-// ignore: depend_on_referenced_packages
+
 import 'package:country_list_pick/country_list_pick.dart';
 import 'package:flutter/material.dart';
 
-void main() => runApp(const MyApp());
+void main() => runApp(MyApp());
 
 class MyApp extends StatefulWidget {
-  const MyApp({Key key}) : super(key: key);
-
   @override
-  MyAppState createState() => MyAppState();
+  _MyAppState createState() => _MyAppState();
 }
 
-class MyAppState extends State<MyApp> {
+class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     super.initState();
@@ -30,7 +28,7 @@ class MyAppState extends State<MyApp> {
           child: CountryListPick(
             appBar: AppBar(
               backgroundColor: Colors.amber,
-              title: const Text('Pick your country'),
+              title: Text('Pick your country'),
             ),
             // if you need custom picker use this
             // pickerBuilder: (context, CountryCode countryCode) {
@@ -57,10 +55,10 @@ class MyAppState extends State<MyApp> {
             // or
             // initialSelection: 'US'
             onChanged: (CountryCode code) {
-              // print(code.name);
-              // print(code.code);
-              // print(code.dialCode);
-              // print(code.flagUri);
+              print(code.name);
+              print(code.code);
+              print(code.dialCode);
+              print(code.flagUri);
             },
           ),
         ),
