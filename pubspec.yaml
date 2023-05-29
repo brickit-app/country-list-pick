@@ -1,7 +1,7 @@
 name: country_list_pick
 description: Flutter plugin project to pick country code, will show code country, dial code, flag country, and name country.
 version: 1.0.2+8
-repository: https://github.com/holybricks/country-list-pick.git
+repository: https://github.com/brickit-app/country-list-pick.git
 
 environment:
   sdk: ">=3.0.0 <4.0.0"
