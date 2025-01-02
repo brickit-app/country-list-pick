@@ -1,17 +1,21 @@
 name: country_list_pick
 description: Flutter plugin project to pick country code, will show code country, dial code, flag country, and name country.
-version: 1.0.2+8
+version: 1.0.2+9
 repository: https://github.com/brickit-app/country-list-pick.git
+publish_to: "none"
 
 environment:
-  sdk: ">=3.0.0 <4.0.0"
-  flutter: ">=3.7.0"
+  sdk: ">=3.3.0 <4.0.0"
+  flutter: ">=3.24.0"
 
 dependencies:
   flutter:
     sdk: flutter
-  modal_bottom_sheet: ^3.0.0-pre
-  figma_squircle: ^0.5.3
+  modal_bottom_sheet: ^3.0.0
+  figma_squircle: # It was on 0.5.3 before being broken by Flutter 3.27.0. This is a fork that fixes it.
+    git:
+      url: https://github.com/Ax0elz/figma_squircle
+      ref: 5f1ad5aaccdf31fc398fc141979ea845a0f45383 # The ref that fixes the issue
 
 dev_dependencies:
   flutter_test:
